@@ -6,6 +6,7 @@ import Historic from './Pages/Historic';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { GraphicEqOutlined, History, Timeline } from '@mui/icons-material';
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
       <div className="grid grid-cols-8 gap-3">
 
 
-        <Box className={"bg-slate-600 h-screen col-span-1"} role="presentation">
+        <Box className={"bg-slate-600 min-h-screen col-span-1"} role="presentation">
           <List>
 
 
@@ -28,7 +29,7 @@ function App() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  <Timeline />
                 </ListItemIcon>
                 <ListItemText primary={"Dashboard"} />
               </ListItemButton>
@@ -39,7 +40,7 @@ function App() {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <History />
                   </ListItemIcon>
                   <ListItemText primary={"Histórico"} />
                 </ListItemButton>
