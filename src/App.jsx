@@ -7,16 +7,17 @@ import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { GraphicEqOutlined, History, Timeline } from '@mui/icons-material';
+import Navbar from './components/Navbar';
 
 function App() {
 
   return (
     <>
-
-      <div className="grid grid-cols-8 gap-3">
-
-
-        <Box className={"bg-slate-600 min-h-screen col-span-1"} role="presentation">
+      <Navbar/>
+      <div className="flex">
+      {/* grid grid-cols-8 xl:grid-cols-10 */}
+      
+        <Box className={"bg-slate-600 min-h-screen col-span-1 lg:block hidden"} role="presentation">
           <List>
 
 
@@ -50,7 +51,7 @@ function App() {
           </List>
         </Box>
 
-        <div className="container col-span-7">
+        <div className="container w-full m-auto">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/historic" element={<Historic />} />
