@@ -6,8 +6,9 @@ import Historic from './Pages/Historic';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { GraphicEqOutlined, History, Timeline } from '@mui/icons-material';
+import { GraphicEqOutlined, History, Timeline, VideocamOutlined } from '@mui/icons-material';
 import Navbar from './components/Navbar';
+import Live from './Pages/Live';
 
 function App() {
 
@@ -48,6 +49,17 @@ function App() {
               </ListItem>
             </Link>
 
+            <Link to={'live'} className='text-inherit hover:text-slate-300'>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <VideocamOutlined />
+                  </ListItemIcon>
+                  <ListItemText primary={"Laboratório"} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+
           </List>
         </Box>
 
@@ -55,6 +67,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/historic" element={<Historic />} />
+            <Route path="/live" element={<Live />} />
           </Routes>
         </div>
       </div>

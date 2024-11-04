@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import GaugeComponent from 'react-gauge-component';
 import Axios from '../Service/Axios';
-import Chart from 'react-apexcharts'
 import { LineChart } from '@mui/x-charts';
-import { Typography } from '@mui/material';
+import { Card, Typography } from '@mui/material';
+import Stats from '../components/Stats';
 
 function Dashboard(props) {
 
@@ -13,7 +13,7 @@ function Dashboard(props) {
     const [potencia, setPotencia] = useState("500");
 
     const [hist, setHist] = useState();
-
+    const [stats, setStats] = useState({});
 
     function toDateWithOutTimeZone(date) {
         let tempTime = date.split(":");
@@ -56,23 +56,39 @@ function Dashboard(props) {
 
             })
         }, 1000);
+        const dia = new Date().toLocaleDateString('en-CA', {
+            timeZone: "America/Sao_Paulo",
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          });
+        console.log(dia);
+        Axios.get(`/registros/estatisticas?data=${dia}`).then(async (resp) => {
+            console.log(resp.data);
+            setStats(resp.data);
 
-        return () => clearInterval(interval);
+        })
+
+        // const intervalStats = setInterval(() => {
+            
+        // }, 10000);
+        
+
+        return () => {
+            clearInterval(interval);
+            // clearInterval(intervalStats);
+        }
     }, [])
 
     return (
         <div>
 
 
-            <div className='w-full text-center text-4xl my-10 mx-auto'>Dashboard</div>
-
-
             <div className="flex lg:flex-row flex-col">
 
                 <div className='lg:w-1/3 w-full'>
 
-                    <div className='w-full text-center text-2xl my-10 mx-auto'>Tensão</div>
-
+                <Stats title={"Tensão"} menor={stats.menor_tensao+"v"} maior={stats.maior_tensao+"v"} horario_menor={stats.horario_menor_tensao} horario_maior={stats.horario_maior_tensao}/>
 
                     <GaugeComponent
                         type="semicircle"
@@ -207,7 +223,9 @@ function Dashboard(props) {
 
                 <div className='lg:w-1/3 w-full'>
 
-                    <div className='w-full text-center text-2xl my-10 mx-auto'>Corrente</div>
+
+                    <Stats title={"Corrente"} menor={stats.menor_corrente+"a"} maior={stats.maior_corrente+"a"} horario_menor={stats.horario_menor_corrente} horario_maior={stats.horario_maior_corrente}/>
+
 
                     <GaugeComponent
                         type="semicircle"
@@ -327,7 +345,7 @@ function Dashboard(props) {
 
                 <div className='lg:w-1/3 w-full'>
 
-                    <div className='w-full text-center text-2xl my-10 mx-auto'>Potência</div>
+                <Stats title={"Potência"} menor={stats.menor_potencia+"w"} maior={stats.maior_potencia+"w"} horario_menor={stats.horario_menor_potencia} horario_maior={stats.horario_maior_potencia}/>
 
                     <GaugeComponent
                         type="semicircle"
