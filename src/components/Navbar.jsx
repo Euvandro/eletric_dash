@@ -1,4 +1,4 @@
-import { ElectricBolt, History, Timeline } from '@mui/icons-material';
+import { ElectricBolt, History, Timeline, VideocamOutlined } from '@mui/icons-material';
 import { AppBar, Box, Button, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom';
@@ -14,11 +14,6 @@ export default function Navbar({ ...props }) {
 
 
         <div className='w-full bg-slate-600 h-20 flex lg:hidden px-9 py-3 justify-around items-center'>
-
-
-            <div className='text-3xl text-center flex justify-center p-5'>
-                RExLab Eletric
-            </div>
 
 
             <div className='flex'>
@@ -41,6 +36,17 @@ export default function Navbar({ ...props }) {
                     <History />
                   </ListItemIcon>
                   <ListItemText primary={"Histórico"} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+
+            <Link to={'live'} className='text-inherit hover:text-slate-300'>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <VideocamOutlined />
+                  </ListItemIcon>
+                  <ListItemText primary={"Laboratório"} />
                 </ListItemButton>
               </ListItem>
             </Link>
