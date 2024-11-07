@@ -9,15 +9,18 @@ import MailIcon from '@mui/icons-material/Mail';
 import { GraphicEqOutlined, History, Timeline, VideocamOutlined } from '@mui/icons-material';
 import Navbar from './components/Navbar';
 import Live from './Pages/Live';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
 
 function App() {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="flex">
-      {/* grid grid-cols-8 xl:grid-cols-10 */}
-      
+        {/* grid grid-cols-8 xl:grid-cols-10 */}
+
         <Box className={"bg-slate-600 min-h-screen col-span-1 lg:block hidden"} role="presentation">
           <List>
 
@@ -28,21 +31,21 @@ function App() {
 
 
             <Link to={'/'} className='text-inherit hover:text-slate-300'>
-            <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Timeline style={{color:"white"}}/>
-                </ListItemIcon>
-                <ListItemText primary={"Rede Elétrica"} />
-              </ListItemButton>
-            </ListItem>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <Timeline style={{ color: "white" }} />
+                  </ListItemIcon>
+                  <ListItemText primary={"Rede Elétrica"} />
+                </ListItemButton>
+              </ListItem>
             </Link>
 
             <Link to={'historic'} className='text-inherit hover:text-slate-300'>
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <History style={{color:"white"}}/>
+                    <History style={{ color: "white" }} />
                   </ListItemIcon>
                   <ListItemText primary={"Histórico"} />
                 </ListItemButton>
@@ -53,7 +56,7 @@ function App() {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <VideocamOutlined style={{color:"white"}}/>
+                    <VideocamOutlined style={{ color: "white" }} />
                   </ListItemIcon>
                   <ListItemText primary={"Laboratório"} />
                 </ListItemButton>
@@ -64,11 +67,13 @@ function App() {
         </Box>
 
         <div className="container w-full m-auto">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/historic" element={<Historic />} />
-            <Route path="/live" element={<Live />} />
-          </Routes>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/historic" element={<Historic />} />
+              <Route path="/live" element={<Live />} />
+            </Routes>
+          </LocalizationProvider>
         </div>
       </div>
     </>

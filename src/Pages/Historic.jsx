@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../Service/Axios';
 
 import Paper from '@mui/material/Paper';
@@ -9,18 +9,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { DatePicker, MobileTimePicker, TimePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
+import { Button, IconButton, Typography } from '@mui/material';
+import { Search } from '@mui/icons-material';
 
 
 const columns = [
-    {   
+    {
         id: 'data',
-        label: 'Data', 
+        label: 'Data',
         //minWidth: 170
     },
 
-    { 
-        id: 'hora', 
-        label: 'Hora', 
+    {
+        id: 'hora',
+        label: 'Hora',
         //minWidth: 100
     },
     {
@@ -82,6 +86,12 @@ function Historic(props) {
     const [data, setData] = React.useState([]);
 
 
+    const [dataInicio, setDataInicio] = useState(dayjs());
+    const [dataFim, setDataFim] = useState(dayjs());
+
+    const [horaInicio, setHoraInicio] = useState(dayjs());
+    const [horaFim, setHoraFim] = useState(dayjs());
+
     const handleChangePage = (event, newPage) => {
         console.log(newPage);
         setPage(newPage);
@@ -94,20 +104,31 @@ function Historic(props) {
 
     useEffect(() => {
 
-       
+
         bucarDados();
 
     }, [page, rowsPerPage])
 
 
-    function bucarDados(pagina, limit){
-        if(pagina == undefined) pagina = page;
-        if(limit == undefined) limit = rowsPerPage;
+    function bucarDados(pagina, limit) {
+        if (pagina == undefined) pagina = page;
+        if (limit == undefined) limit = rowsPerPage;
 
-        axios.get(`/registros?page=${pagina+1}&limit=${limit}`).then((resp) => {
+        axios.get(`/registros?page=${pagina + 1}&limit=${limit}`).then((resp) => {
             console.log(resp.data);
             setData(resp.data);
         })
+    }
+
+    function Pesquisar(pagina, limit){
+        if (pagina == undefined) pagina = page;
+        if (limit == undefined) limit = rowsPerPage;
+        axios.get(`/registros?page=${pagina + 1}&limit=${limit}&data_inicio=${dayjs(dataInicio).format("YYYY-MM-DD")}&data_fim=${dayjs(dataFim).format("YYYY-MM-DD")}&hora_inicio=${dayjs(horaInicio).format("HH:mm:ss")}&hora_fim=${dayjs(horaFim).format("HH:mm:ss")}`).then((resp) => {
+            console.log(resp.data);
+            setData(resp.data);
+        })
+
+
     }
 
 
@@ -116,6 +137,49 @@ function Historic(props) {
             <h2 className='my-10 text-4xl'>
                 Histórico
             </h2>
+
+
+            <Paper className='p-4'>
+                <Typography className='mb-4'>Filtros</Typography>
+
+                <div className="flex gap-4 mt-4">
+                    <DatePicker
+                        label="Data Início"
+                        value={dataInicio}
+                        onChange={(newValue) => setDataInicio(newValue)}
+                    />
+
+                    <DatePicker
+                        label="Data Fim"
+                        value={dataFim}
+                        onChange={(newValue) => setDataFim(newValue)}
+                    />
+
+                    <MobileTimePicker
+                        label="Hora Início"
+                        views={['hours', 'minutes', 'seconds']}
+                        ampm={false}
+                        value={horaInicio}
+                        onChange={(newValue) => setHoraInicio(newValue)} />
+
+                    <MobileTimePicker
+                        label="Hora Fim"
+                        views={['hours', 'minutes', 'seconds']}
+                        ampm={false}
+                        value={horaFim}
+                        onChange={(newValue) => setHoraFim(newValue)} />
+
+                        <Button variant='outlined' color='inherit' onClick={() => Pesquisar()}>
+
+                                <Search />
+                        
+                            Pesquisar
+                        
+                        </Button>
+                </div>
+
+
+            </Paper>
 
             <Paper className='m-auto my-10 max-w-lg lg:max-w-full'>
                 <TableContainer>
@@ -126,7 +190,7 @@ function Historic(props) {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        //style={{ minWidth: column.minWidth }}
+                                    //style={{ minWidth: column.minWidth }}
                                     >
                                         {column.label}
                                     </TableCell>
