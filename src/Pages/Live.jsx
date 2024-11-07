@@ -16,7 +16,7 @@ export default function Live(){
                 <CircularProgress color='white' size={80} className='absolute' style={{display: loading ? "block" : "none", transform: "translate(-50%, -50%)", top:"50%", left:"50%"}}/>
                 <img src='https://cam.rexlab.ufsc.br/motion' onLoad={() => setLoading(false)} />
                 
-                <Typography className='pt-2'>
+                <Typography className='pt-2 text-white'>
                 Laboratório de Experimentação Remota - UFSC Araranguá
                 </Typography>
             </div>

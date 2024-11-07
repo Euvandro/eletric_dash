@@ -23,7 +23,7 @@ function App() {
 
 
             <div className='text-3xl text-center flex justify-center p-5'>
-              RExLab Eletric
+              RExLab
             </div>
 
 
@@ -31,9 +31,9 @@ function App() {
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <Timeline />
+                  <Timeline style={{color:"white"}}/>
                 </ListItemIcon>
-                <ListItemText primary={"Dashboard"} />
+                <ListItemText primary={"Rede Elétrica"} />
               </ListItemButton>
             </ListItem>
             </Link>
@@ -42,7 +42,7 @@ function App() {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <History />
+                    <History style={{color:"white"}}/>
                   </ListItemIcon>
                   <ListItemText primary={"Histórico"} />
                 </ListItemButton>
@@ -53,7 +53,7 @@ function App() {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <VideocamOutlined />
+                    <VideocamOutlined style={{color:"white"}}/>
                   </ListItemIcon>
                   <ListItemText primary={"Laboratório"} />
                 </ListItemButton>

@@ -16,15 +16,15 @@ export default function Navbar({ ...props }) {
         <div className='w-full bg-slate-600 h-20 flex lg:hidden px-9 py-3 justify-around items-center'>
 
 
-            <div className='flex'>
+            <div className='flex gap-3'>
 
             <Link to={'/'} className='text-inherit hover:text-slate-300'>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <Timeline />
+                  <Timeline style={{color:"white", fontSize:'32px'}}/>
                 </ListItemIcon>
-                <ListItemText primary={"Dashboard"} />
+                <span className='text-xl'>Rede Elétrica</span>
               </ListItemButton>
             </ListItem>
             </Link>
@@ -33,9 +33,9 @@ export default function Navbar({ ...props }) {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <History />
+                    <History style={{color:"white", fontSize:'32px'}}/>
                   </ListItemIcon>
-                  <ListItemText primary={"Histórico"} />
+                  <span className='text-xl'>Histórico</span>
                 </ListItemButton>
               </ListItem>
             </Link>
@@ -44,9 +44,9 @@ export default function Navbar({ ...props }) {
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    <VideocamOutlined />
+                    <VideocamOutlined style={{color:"white", fontSize:'32px'}}/>
                   </ListItemIcon>
-                  <ListItemText primary={"Laboratório"} />
+                  <span className='text-xl'>Laboratório</span>
                 </ListItemButton>
               </ListItem>
             </Link>

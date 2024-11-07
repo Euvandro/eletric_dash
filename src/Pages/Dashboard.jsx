@@ -62,8 +62,8 @@ function Dashboard(props) {
             month: '2-digit',
             day: '2-digit'
           });
-        console.log(dia);
-        Axios.get(`/registros/estatisticas?data=${dia}`).then(async (resp) => {
+
+          Axios.get(`/registros/estatisticas?data=${dia}`).then(async (resp) => {
             console.log(resp.data);
             setStats(resp.data);
 
@@ -100,7 +100,7 @@ function Dashboard(props) {
 
                             subArcs: [
                                 {
-                                    limit: 205,
+                                    limit: 201,
                                     color: '#EA4228',
                                     showTick: true,
                                     tooltip: {
@@ -116,21 +116,21 @@ function Dashboard(props) {
                                     }
                                 },
                                 {
-                                    limit: 225,
+                                    limit: 227,
                                     color: '#5BE12C',
                                     showTick: true,
                                     tooltip: {
                                         text: 'Voltagem Ideal!'
                                     }
                                 },
-                                {
-                                    limit: 235,
-                                    color: '#F5CD19',
-                                    showTick: true,
-                                    tooltip: {
-                                        text: 'Voltagem alta!'
-                                    }
-                                },
+                                // {
+                                //     limit: 235,
+                                //     color: '#F5CD19',
+                                //     showTick: true,
+                                //     tooltip: {
+                                //         text: 'Voltagem alta!'
+                                //     }
+                                // },
                                 {
                                     color: '#EA4228',
                                     tooltip: {
@@ -177,19 +177,25 @@ function Dashboard(props) {
 
                                 skipAnimation={true}
                                 title='Tensão'
-                                colors={["#ff0000"]}
+                                colors={["white"]}
                                 sx={{
                                     //change left yAxis label styles
                                     "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.4",
-                                        fill: "#ff0000"
+                                        fill: "white"
                                     },
                                     "& .MuiChartsAxis-left .MuiChartsAxis-tick": {
-                                        stroke: "#ff0000",
+                                        stroke: "gray",
+                                    },
+
+                                    // leftAxis Line Styles
+                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
+                                        stroke: "gray",
+                                        strokeWidth: 0.4
                                     },
 
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tick": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                     },
                                     // change all labels fontFamily shown on both xAxis and yAxis
                                     "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tickLabel": {
@@ -198,18 +204,17 @@ function Dashboard(props) {
                                     // change bottom label styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.5",
-                                        fill: "#0000FF"
+                                        fill: "white"
                                     },
                                     // bottomAxis Line Styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                         strokeWidth: 0.4
                                     },
-                                    // leftAxis Line Styles
-                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
-                                        stroke: "#ff0000",
-                                        strokeWidth: 0.4
+                                    "& .MuiMarkElement-root":{
+                                        fill:'gray'
                                     }
+                                    
                                 }}
 
                             />
@@ -299,20 +304,25 @@ function Dashboard(props) {
 
                                 skipAnimation={true}
                                 title='Corrente'
-                                colors={["#0000FF"]}
+                                colors={["white"]}
 
                                 sx={{
-                                    //change left yAxis label styles
                                     "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.4",
-                                        fill: "#ff0000"
+                                        fill: "white"
                                     },
                                     "& .MuiChartsAxis-left .MuiChartsAxis-tick": {
-                                        stroke: "#ff0000",
+                                        stroke: "gray",
+                                    },
+
+                                    // leftAxis Line Styles
+                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
+                                        stroke: "gray",
+                                        strokeWidth: 0.4
                                     },
 
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tick": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                     },
                                     // change all labels fontFamily shown on both xAxis and yAxis
                                     "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tickLabel": {
@@ -321,17 +331,15 @@ function Dashboard(props) {
                                     // change bottom label styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.5",
-                                        fill: "#0000FF"
+                                        fill: "white"
                                     },
                                     // bottomAxis Line Styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                         strokeWidth: 0.4
                                     },
-                                    // leftAxis Line Styles
-                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
-                                        stroke: "#ff0000",
-                                        strokeWidth: 0.4
+                                    "& .MuiMarkElement-root":{
+                                        fill:'gray'
                                     }
                                 }}
                             />
@@ -357,7 +365,7 @@ function Dashboard(props) {
 
                             subArcs: [
                                 {
-                                    limit: 333,
+                                    limit: 2200,
                                     color: '#5BE12C',
                                     showTick: true,
                                     tooltip: {
@@ -365,7 +373,7 @@ function Dashboard(props) {
                                     }
                                 },
                                 {
-                                    limit: 666,
+                                    limit: 4400,
                                     color: '#F5CD19',
                                     showTick: true,
                                     tooltip: {
@@ -374,7 +382,6 @@ function Dashboard(props) {
                                 },
                                 {
                                     color: '#EA4228',
-                                    showTick: true,
                                     tooltip: {
                                         text: 'Potência Alta!'
                                     }
@@ -398,7 +405,7 @@ function Dashboard(props) {
                         }}
                         value={potencia}
                         minValue={0}
-                        maxValue={1000}
+                        maxValue={8800}
                     />
 
 
@@ -419,20 +426,25 @@ function Dashboard(props) {
 
                                 skipAnimation={true}
                                 title='Potência'
-                                colors={["#0000FF"]}
+                                colors={["white"]}
 
                                 sx={{
-                                    //change left yAxis label styles
-                                    "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+                                   "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.4",
-                                        fill: "#ff0000"
+                                        fill: "white"
                                     },
                                     "& .MuiChartsAxis-left .MuiChartsAxis-tick": {
-                                        stroke: "#ff0000",
+                                        stroke: "gray",
+                                    },
+
+                                    // leftAxis Line Styles
+                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
+                                        stroke: "gray",
+                                        strokeWidth: 0.4
                                     },
 
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tick": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                     },
                                     // change all labels fontFamily shown on both xAxis and yAxis
                                     "& .MuiChartsAxis-tickContainer .MuiChartsAxis-tickLabel": {
@@ -441,17 +453,15 @@ function Dashboard(props) {
                                     // change bottom label styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
                                         strokeWidth: "0.5",
-                                        fill: "#0000FF"
+                                        fill: "white"
                                     },
                                     // bottomAxis Line Styles
                                     "& .MuiChartsAxis-bottom .MuiChartsAxis-line": {
-                                        stroke: "#0000FF",
+                                        stroke: "gray",
                                         strokeWidth: 0.4
                                     },
-                                    // leftAxis Line Styles
-                                    "& .MuiChartsAxis-left .MuiChartsAxis-line": {
-                                        stroke: "#ff0000",
-                                        strokeWidth: 0.4
+                                    "& .MuiMarkElement-root":{
+                                        fill:'gray'
                                     }
                                 }}
                             />
