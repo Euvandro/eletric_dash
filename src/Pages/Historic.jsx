@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import { DatePicker, MobileTimePicker, TimePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { Button, IconButton, Typography } from '@mui/material';
-import { Search } from '@mui/icons-material';
+import { Download, Search } from '@mui/icons-material';
 
 
 const columns = [
@@ -80,11 +80,12 @@ function createData(
 function Historic(props) {
 
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
 
-    const [data, setData] = React.useState([]);
+    const [data, setData] = useState([]);
 
+    const [pesquisado, setPesquisado] = useState(false);
 
     const [dataInicio, setDataInicio] = useState(dayjs());
     const [dataFim, setDataFim] = useState(dayjs());
@@ -120,12 +121,24 @@ function Historic(props) {
         })
     }
 
-    function Pesquisar(pagina, limit){
+    function Pesquisar(pagina, limit) {
         if (pagina == undefined) pagina = page;
         if (limit == undefined) limit = rowsPerPage;
         axios.get(`/registros?page=${pagina + 1}&limit=${limit}&data_inicio=${dayjs(dataInicio).format("YYYY-MM-DD")}&data_fim=${dayjs(dataFim).format("YYYY-MM-DD")}&hora_inicio=${dayjs(horaInicio).format("HH:mm:ss")}&hora_fim=${dayjs(horaFim).format("HH:mm:ss")}`).then((resp) => {
             console.log(resp.data);
             setData(resp.data);
+            setPesquisado(true);
+        })
+
+
+    }
+
+
+    function Baixar() {
+
+        axios.get(`/registros/exportar-csv?data_inicio=${dayjs(dataInicio).format("YYYY-MM-DD")}&data_fim=${dayjs(dataFim).format("YYYY-MM-DD")}&hora_inicio=${dayjs(horaInicio).format("HH:mm:ss")}&hora_fim=${dayjs(horaFim).format("HH:mm:ss")}`).then((resp) => {
+            console.log(resp.data.link);
+            window.location = 'https://metlab.rexlab.ufsc.br/eletrica'+resp.data.link;
         })
 
 
@@ -169,13 +182,21 @@ function Historic(props) {
                         value={horaFim}
                         onChange={(newValue) => setHoraFim(newValue)} />
 
-                        <Button variant='outlined' color='inherit' onClick={() => Pesquisar()}>
+                    <Button variant='outlined' color='inherit' onClick={() => Pesquisar()}>
 
-                                <Search />
-                        
-                            Pesquisar
-                        
-                        </Button>
+                        <Search />
+
+                        Pesquisar
+
+                    </Button>
+
+                    <Button variant='outlined' color='inherit' disabled={!pesquisado} onClick={() => Baixar()}>
+
+                        <Download />
+
+                        Baixar Relatório
+
+                    </Button>
                 </div>
 
 

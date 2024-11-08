@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Live from './Pages/Live';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Labs from './Pages/Labs';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/historic" element={<Historic />} />
               <Route path="/live" element={<Live />} />
+              <Route path="/labs" element={<Labs />} />
             </Routes>
           </LocalizationProvider>
         </div>
